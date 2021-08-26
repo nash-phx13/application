@@ -1,0 +1,9 @@
+<h1>新規投稿</h1>
+<%= form_with model: @list, url:'/todolists', local:true do |l| %>
+<h3>題名</h3>
+<%= l.text_field :title %>
+<h4>本文</h4>
+<%= l.text_area :body %>
+<%= l.submit'投稿する'%>
+<% end %>
+
