@@ -3,10 +3,18 @@ class TodolistsController < ApplicationController
     @list=List.new
   end
   
+  def index
+    @lists = List.all
+  end
+  
+  def show
+    @list = List.find(params[:id])
+  end
+  
   def create
     list = List.new(list_params) #データを新規登録するためのインスタンス作成
     list.save                    #データをデータベースへ保存するためsaveメソッド実行　　　　　　　　　　　　
-    redirect_to'/top'            #トップ画面へリダイレクト
+    redirect_to todolist_path(list.id) #引数(list.id)を記述しないとどの投稿を見えたら良いかわからないため
   end
 
 private #ストロングパラメータは
