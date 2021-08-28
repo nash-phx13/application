@@ -7,5 +7,6 @@ post'todolists' => 'todolists#create'
 get'todolists' => 'todolists#index'
 get'todolists/:id' => 'todolists#show',as:'todolist' # .../todolists/1 や .../todolists/3 に該当
                                                      #as:'名前'は「名前付きルート」
+get 'todolists/:id/edit' => 'todolists#edit', as: 'edit_todolist'
 
 end
