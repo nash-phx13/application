@@ -4,9 +4,12 @@ class TodolistsController < ApplicationController
   end
   
   def create
-    list = List.new(list_params) #データを新規登録するためのインスタンス作成
-    list.save                    #データをデータベースへ保存するためsaveメソッド実行　　　　　　　　　　　　
-    redirect_to todolist_path(list.id) #引数(list.id)を記述しないとどの投稿を見えたら良いかわからないため
+    @list = List.new(list_params)
+    if @list.save
+      redirect_to todolist_path(@list.id)
+    else
+      render :new
+    end
   end
   
   def index
@@ -29,7 +32,7 @@ class TodolistsController < ApplicationController
 
 private #ストロングパラメータは
 def list_params
-  params.require(:list).permit(:title,:body) #requireでデータをオブジェクト名を指名し、permitでキーを指定する
+  params.require(:list).permit(:title,:body,:image) #requireでデータをオブジェクト名を指名し、permitでキーを指定する
 end
 end
 
