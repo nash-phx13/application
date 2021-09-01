@@ -1,4 +1,4 @@
-class TodolistsController < ApplicationController
+class BlogsController < ApplicationController
   def new
     @list=List.new
   end
