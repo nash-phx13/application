@@ -1,43 +1,25 @@
 class BlogsController < ApplicationController
-  def new
-    @list=List.new
-  end
-  
-  def create
-    @list = List.new(list_params)
-    if @list.save
-      redirect_to todolist_path(@list.id)
-    else
-      render :new
-    end
-  end
-  
-  def index
-    @lists = List.all
-  end
-  
   def show
-    @list = List.find(params[:id])
   end
-  
+
+  def index
+  end
+
+  def new
+     @blog = Blog.new
+  end
+
+  def create
+    blog = Blog.new(blog_params)
+    blog.save
+    redirect_to blogs_path
+  end
   def edit
-   @list= List.find(params[:id])
   end
-  
-  def update
-    list = List.find(params[:id])
-    list.update(list_params)
-    redirect_to todolist_path(list.id)
+
+ private
+  def blog_params
+    params.require(:blog).permit(:title, :category, :body)
   end
-def destroy
-    list = List.find(params[:id])  # データ（レコード）を1件取得
-    list.destroy  # データ（レコード）を削除
-    redirect_to todolists_path  # 投稿一覧画面へリダイレクト
-end
 
-private #ストロングパラメータは
-def list_params
-  params.require(:list).permit(:title,:body,:image) #requireでデータをオブジェクト名を指名し、permitでキーを指定する
 end
-end
-
